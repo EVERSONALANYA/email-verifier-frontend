@@ -1,6 +1,6 @@
 ﻿// JavaScript source code
 // *** REEMPLAZA ESTA URL CON LA URL REAL DE TU API DESPLEGADA ***
-const API_URL = 'hhttps://email-verifier-d799uy09z-eversonalanyas-projects.vercel.app';
+const API_URL = 'https://email-verifier-api-git-main-eversonalanyas-projects.vercel.app/api/verify';
 
 async function verificarEmailAvanzado() {
     const emailInput = document.getElementById('emailInput');
@@ -48,4 +48,5 @@ async function verificarEmailAvanzado() {
         verifyButton.disabled = false;
         verifyButton.textContent = 'Verificar Dominio';
     }
+
 }
