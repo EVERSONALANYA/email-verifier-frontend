@@ -1,6 +1,5 @@
-﻿// JavaScript source code
 // *** REEMPLAZA ESTA URL CON LA URL REAL DE TU API DESPLEGADA ***
-const API_URL = 'https://verificador-api.vercel.app/api/verify';
+const API_URL = 'https://verificador-de-correo-electronico-api-one.vercel.app/api/verify'; 
 
 async function verificarEmailAvanzado() {
     const emailInput = document.getElementById('emailInput');
@@ -12,10 +11,10 @@ async function verificarEmailAvanzado() {
     resultadoElement.textContent = '';
     resultadoElement.className = '';
     verifyButton.disabled = true;
-    verifyButton.textContent = 'Verificando...'; // Muestra estado de carga
+    verifyButton.textContent = 'Verificando...'; 
 
     if (email === "") {
-        resultadoElement.textContent = "Por favor, ingresa una dirección.";
+        resultadoElement.textContent = "⚠️ Por favor, ingresa una dirección.";
         resultadoElement.className = 'info visible';
         verifyButton.disabled = false;
         verifyButton.textContent = 'Verificar Dominio';
@@ -31,23 +30,23 @@ async function verificarEmailAvanzado() {
         });
 
         const data = await response.json();
-
-        // 3. Mostrar resultado final
+        
+        // 3. Mostrar resultado final basado en la respuesta del servidor
         if (data.isValid) {
-            resultadoElement.textContent = `✅ Éxito: ${data.reason}`;
+            resultadoElement.innerHTML = `<i class="fas fa-check-circle"></i> ${data.reason}`;
             resultadoElement.className = 'valido visible';
         } else {
-            resultadoElement.textContent = `❌ Fallo: ${data.reason}`;
+            resultadoElement.innerHTML = `<i class="fas fa-times-circle"></i> ${data.reason}`;
             resultadoElement.className = 'invalido visible';
         }
     } catch (error) {
-        resultadoElement.textContent = '⚠️ Error de conexión. Vuelve a intentarlo.';
+        // Este catch maneja errores de red o CORS que la API no puede interceptar
+        resultadoElement.innerHTML = '⚠️ Error de conexión. El servidor no respondió o hubo un problema de CORS.';
         resultadoElement.className = 'invalido visible';
     } finally {
-        // 4. Resetear botón y estado
+        // 4. Resetear botón
         verifyButton.disabled = false;
         verifyButton.textContent = 'Verificar Dominio';
     }
-
 }
 
