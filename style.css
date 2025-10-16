@@ -1,0 +1,150 @@
+﻿b /* =========================================
+   1. Importación y Estilos Base
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    /* Fondo suave */
+    background-color: #e0f2f7;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. Contenedor Principal
+   ========================================= */
+
+.container {
+    /* Estilo tipo 'tarjeta' flotante */
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.8em;
+}
+
+/* =========================================
+   3. Input y Botón
+   ========================================= */
+
+#emailInput {
+    padding: 12px 15px;
+    margin: 20px 0;
+    width: calc(100% - 30px); /* Ajuste por padding */
+    border: 1px solid #a8dadc;
+    border-radius: 8px;
+    font-size: 1.1em;
+    transition: all 0.3s ease; /* Transición para el foco */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+    #emailInput:focus {
+        outline: none;
+        border-color: #457b9d;
+        box-shadow: 0 0 0 3px rgba(69, 123, 157, 0.3);
+    }
+
+#verifyButton {
+    padding: 12px 25px;
+    background-color: #1a73e8; /* Azul vibrante */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    #verifyButton:hover:not(:disabled) {
+        background-color: #155bb5;
+        transform: translateY(-2px);
+    }
+
+    #verifyButton:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    #verifyButton:disabled {
+        background-color: #99aab5; /* Gris cuando está deshabilitado */
+        cursor: not-allowed;
+    }
+
+/* =========================================
+   4. Área de Resultado y Estados
+   ========================================= */
+
+#resultado {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.4s ease-out;
+    opacity: 0; /* Por defecto oculto para animación */
+    transform: translateY(10px);
+}
+
+    #resultado.visible {
+        opacity: 1; /* Visible cuando se le añade la clase */
+        transform: translateY(0);
+    }
+
+/* Estado de Información/Alerta */
+.info {
+    color: #1f3a93;
+    background-color: #dbe4ff;
+    border: 1px solid #a7b8ff;
+}
+
+/* Estado Válido (Éxito de formato Y existencia MX) */
+.valido {
+    color: #28a745;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+/* Estado Inválido (Fallo de formato O fallo de existencia MX) */
+.invalido {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* =========================================
+   5. Responsive
+   ========================================= */
+
+@media (max-width: 600px) {
+    .container {
+        padding: 25px;
+        margin: 15px;
+    }
+    /* Ajuste para que el botón ocupe todo el ancho en móvil */
+    #verifyButton {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
