@@ -1,150 +1,314 @@
-﻿b /* =========================================
-   1. Importación y Estilos Base
-   ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-body {
-    /* Fondo suave */
-    background-color: #e0f2f7;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+:root {
+    --bg-color: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary: #ec4899;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    --border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+body.light-mode {
+    --bg-color: #f1f5f9;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: rgba(0, 0, 0, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+body.light-mode .highlight {
+    background: linear-gradient(135deg, #4f46e5 0%, #db2777 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+* {
+    box-sizing: border-box;
     margin: 0;
-    color: #333;
-    line-height: 1.6;
+    padding: 0;
 }
-
-/* =========================================
-   2. Contenedor Principal
-   ========================================= */
-
-.container {
-    /* Estilo tipo 'tarjeta' flotante */
-    background: linear-gradient(145deg, #ffffff, #e6e6e6);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 20%);
+    min-height: 100vh;
+    padding: 2rem;
+}
+.app-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.main-header {
     text-align: center;
-    max-width: 500px;
-    width: 90%;
+    margin-bottom: 3rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-h1 {
-    color: #2c3e50;
-    margin-bottom: 30px;
+#theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    font-size: 1.8em;
-}
-
-/* =========================================
-   3. Input y Botón
-   ========================================= */
-
-#emailInput {
-    padding: 12px 15px;
-    margin: 20px 0;
-    width: calc(100% - 30px); /* Ajuste por padding */
-    border: 1px solid #a8dadc;
-    border-radius: 8px;
-    font-size: 1.1em;
-    transition: all 0.3s ease; /* Transición para el foco */
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
-}
-
-    #emailInput:focus {
-        outline: none;
-        border-color: #457b9d;
-        box-shadow: 0 0 0 3px rgba(69, 123, 157, 0.3);
-    }
-
-#verifyButton {
-    padding: 12px 25px;
-    background-color: #1a73e8; /* Azul vibrante */
-    color: white;
-    border: none;
-    border-radius: 8px;
     cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
 }
-
-    #verifyButton:hover:not(:disabled) {
-        background-color: #155bb5;
-        transform: translateY(-2px);
-    }
-
-    #verifyButton:active:not(:disabled) {
-        transform: translateY(0);
-    }
-
-    #verifyButton:disabled {
-        background-color: #99aab5; /* Gris cuando está deshabilitado */
-        cursor: not-allowed;
-    }
-
-/* =========================================
-   4. Área de Resultado y Estados
-   ========================================= */
-
-#resultado {
-    margin-top: 25px;
-    padding: 15px;
+#theme-toggle:hover {
+    transform: rotate(15deg) scale(1.1);
+    background: var(--primary);
+}
+.logo h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    margin-bottom: 0.5rem;
+}
+.highlight {
+    color: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--glass-shadow);
+    margin-bottom: 2rem;
+}
+.input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+.export-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+.btn.small {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+.btn.outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+.btn.outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.input-header h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+textarea {
+    width: 100%;
+    height: 150px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border);
     border-radius: 8px;
-    font-weight: bold;
-    font-size: 1.1em;
+    padding: 1rem;
+    color: var(--text-main);
+    font-family: 'Outfit', monospace;
+    font-size: 0.9rem;
+    resize: vertical;
+    transition: all 0.2s;
+}
+/* Drag & Drop States */
+.input-section.drag-active {
+    border-color: var(--primary);
+    background: rgba(99, 102, 241, 0.1);
+}
+.input-section.drag-active textarea {
+    pointer-events: none;
+    /* Let the section handle the drop */
+}
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+.process-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all 0.4s ease-out;
-    opacity: 0; /* Por defecto oculto para animación */
-    transform: translateY(10px);
+    gap: 0.5rem;
 }
-
-    #resultado.visible {
-        opacity: 1; /* Visible cuando se le añade la clase */
-        transform: translateY(0);
+.btn.primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+.btn.primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+.btn.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+}
+.btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.btn.text-only {
+    background: transparent;
+    color: var(--text-muted);
+}
+.btn.text-only:hover {
+    color: var(--text-main);
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.stat-card h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+.stat-card .number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.progress-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.progress-bar .fill {
+    height: 100%;
+    transition: width 0.5s ease-out;
+}
+.stat-card.valid .number {
+    color: var(--success);
+}
+.stat-card.valid .fill {
+    background: var(--success);
+}
+.stat-card.invalid .number {
+    color: var(--error);
+}
+.stat-card.invalid .fill {
+    background: var(--error);
+}
+.stat-card.risky .number {
+    color: var(--warning);
+}
+.stat-card.risky .fill {
+    background: var(--warning);
+}
+.results-section.hidden {
+    display: none;
+}
+/* Table */
+.table-container {
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th {
+    text-align: left;
+    padding: 1rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+}
+td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+tr:last-child td {
+    border-bottom: none;
+}
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.status-valid {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--success);
+}
+.status-invalid {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--error);
+}
+.status-risky {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+}
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
     }
-
-/* Estado de Información/Alerta */
-.info {
-    color: #1f3a93;
-    background-color: #dbe4ff;
-    border: 1px solid #a7b8ff;
-}
-
-/* Estado Válido (Éxito de formato Y existencia MX) */
-.valido {
-    color: #28a745;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-}
-
-/* Estado Inválido (Fallo de formato O fallo de existencia MX) */
-.invalido {
-    color: #dc3545;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-}
-
-/* =========================================
-   5. Responsive
-   ========================================= */
-
-@media (max-width: 600px) {
-    .container {
-        padding: 25px;
-        margin: 15px;
+    .logo h1 {
+        font-size: 2rem;
     }
-    /* Ajuste para que el botón ocupe todo el ancho en móvil */
-    #verifyButton {
-        width: 100%;
-        margin-top: 10px;
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
